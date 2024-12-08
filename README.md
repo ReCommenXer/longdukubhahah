@@ -2880,12 +2880,11 @@ local Players = game:GetService("Players")
 local PlayerGUI = Players.LocalPlayer:FindFirstChild("PlayerGui")
 local RenderStepped = RunService.RenderStepped
 local NamePlayer = Players.localPlayer.Name
+local chackrod = game:GetService("ReplicatedStorage").playerstats:FindFirstChild(NamePlayer).Stats.rod
 
 function Reel()
-	if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("reel") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("reel").Enabled == true then
-		game:GetService("ReplicatedStorage").events.reelfinished:FireServer(100,false)
+		game:GetService("ReplicatedStorage").events.reelfinished:FireServer(100,true)
 		wait(Reeldeley)
-	end
 end
 
 
@@ -2934,12 +2933,12 @@ end
 
 
 function EquipRod()
-local chackrod = game:GetService("ReplicatedStorage").playerstats:FindFirstChild(NamePlayer).Stats.rod
+
     for _, tool in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         if tool:IsA("Tool") and (tool.Name:find(chackrod) or tool.Name:find(chackrod)) then
 			if game.Players.LocalPlayer.Backpack:FindFirstChild(tool) then
 				wait(.1)
-				game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+				Workspace:FindFirstChild(NamePlayer).Humanoid:EquipTool(tool)
             return tool
         end
     end
@@ -2962,7 +2961,7 @@ end
                     Cast()
         			Shake()
        				Reel()
-					   EquipRod()
+					EquipRod()
       	          end
             end)
         end
